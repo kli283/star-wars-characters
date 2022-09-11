@@ -27,9 +27,8 @@ const Character= ({
     useEffect(() => {
         const fetchPlanet = async () => {
             try {
-                console.log(characterInfo.homeworld)
-                const resultPlanet = await axios(`https://swapi.dev/api/planets/1`);
-                console.log(resultPlanet.data.results);
+                setIsLoadingPlanet(true);
+                const resultPlanet = await axios(`${characterInfo.homeworld}`);
                 setPlanet(resultPlanet.data.results);
                 setIsLoadingPlanet(false);
             }  catch (err) {
@@ -37,8 +36,7 @@ const Character= ({
             }
         };
         fetchPlanet();
-    }, []);
-
+    }, [planet]);
 
     return (
         <div>
@@ -72,16 +70,14 @@ const Character= ({
                         <p>
                             <strong>Eye colour:</strong> {characterInfo.eye_color}
                         </p>
-                        <p>
-                            <strong>Home planet:</strong>
+                        <strong>Home planet:</strong>
                             { isLoadingPlanet ? (
                                 <div className="loader-container">
                                     <LoadingSpinner />
                                 </div>
                             ) :
                                 <div>{planet ? planet.name : "Planet not found"}</div>
-                            }
-                        </p>
+                        }
                     </div>
                 </Box>
             </Modal>

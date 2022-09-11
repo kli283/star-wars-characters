@@ -41,7 +41,7 @@ export const MainPage = ({
                                 <LoadingSpinner />
                             ) : (
                                 <>
-                                    {pageNumber === 2 ? (
+                                    {pageNumber === 1 ? (
                                         <button type="button" onClick={() => pageUp()}>
                                             Next Page
                                         </button>

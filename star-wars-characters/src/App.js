@@ -32,11 +32,10 @@ const App = () => {
         const fetchCharacters = async () => {
             try {
                 setIsLoadingCharacters(true);
-                const resultCharacters = await axios(`https://swapi.dev/api/people/`);
+                const resultCharacters = await axios(`https://swapi.dev/api/people/?page=1`);
                 setCharacters(sortCharacters(resultCharacters.data.results));
                 maxCharacters.current = resultCharacters.data.count;
                 setPageNumber(pageNumber + 1)
-                console.log(pageNumber);
                 setIsLoadingCharacters(false);
             } catch (err) {
                 console.error(err);
@@ -49,7 +48,6 @@ const App = () => {
         setIsLoadingMore(true);
         setPageNumber(pageNumber + 1);
         const result = await axios(`https://swapi.dev/api/people/?page=${pageNumber}`);
-        console.log(pageNumber);
         setCharacters(sortCharacters(result.data.results));
 
         setIsLoadingMore(false);
@@ -60,7 +58,6 @@ const App = () => {
         setPageNumber(pageNumber - 1);
         const result = await axios(`https://swapi.dev/api/people/?page=${pageNumber}`);
         setCharacters(sortCharacters(result.data.results));
-        console.log(pageNumber);
         setIsLoadingMore(false);
     };
 
